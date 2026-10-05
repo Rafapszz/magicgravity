@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Castelo & Academia Rocha Chueiri - Web Oficial v1.0 🏰</title>
+    <!-- CSS Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js para áudio estilo Chiptune 8-bit -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- Font Awesome para ícones retrô -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Cursor Personalizado Estilo Espada */
+        body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="gold"><path d="M7 2v2h2v2h2v2h2v2h2v2h2v2h-2v2h-2v2h-2v2H9v-2H7v-2H5v-2H3v-2h2v-2h2V8h2V6h2V4H7V2z"/></svg>'), auto;
+            font-family: "Comic Sans MS", "Times New Roman", "MS Sans Serif", cursive, serif;
+            /* Fundo de textura de tijolos cinza com padrão CSS */
+            background-color: #2b2b2b;
+            background-image: 
+                linear-gradient(335deg, #1f1f1f 23px, transparent 23px),
+                linear-gradient(155deg, #383838 23px, transparent 23px),
+                linear-gradient(335deg, #1f1f1f 23px, transparent 23px),
+                linear-gradient(155deg, #383838 23px, transparent 23px);
+            background-size: 58px 58px;
+            background-position: 0 2px, 4px 35px, 29px 31px, 34px 6px;
+            color: #331f00;
+        }
+
+        a, button, input, textarea, select {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="red"><path d="M7 2v2h2v2h2v2h2v2h2v2h2v2h-2v2h-2v2h-2v2H9v-2H7v-2H5v-2H3v-2h2v-2h2V8h2V6h2V4H7V2z"/></svg>'), pointer !important;
+        }
+
+        /* Molduras e BORDAS RETRÔ ESTILO WEB 2000 */
+        .retro-box {
+            background-color: #fef08a; /* Amarelo pergaminho */
+            border: 4px ridge #d97706;
+            box-shadow: 6px 6px 0px #000;
+        }
+
+        .retro-box-inner {
+            background-color: #fef9c3;
+            border: 2px inset #b45309;
+        }
+
+        .brick-border {
+            border: 8px solid #52525b;
+            border-image: repeating-linear-gradient(45deg, #3f3f46, #3f3f46 10px, #71717a 10px, #71717a 20px) 20;
+        }
+
+        /* Efeito de Glitter e Texto Piscante */
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .gold-glow {
+            text-shadow: 2px 2px 0px #854d0e, -1px -1px 0px #fef08a, 0px 0px 8px #f59e0b;
+        }
+
+        /* Barra de rolagem estilo clássico Windows 98/2000 */
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #d4d4d8;
+            border: 1px solid #71717a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b45309;
+            border: 2px outset #f59e0b;
+        }
+
+        /* Animação do Sparkle / Estrelas no Mouse */
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: gold;
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            animation: explode 0.6s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 min-h-screen flex flex-col items-center justify-between">
+
+    <div class="max-w-5xl w-full mx-auto">
+        
+        <!-- CABEÇALHO DO CASTELO ROCHA CHUEIRI -->
+        <header class="retro-box p-4 mb-4 text-center relative overflow-hidden">
+            <!-- Animações laterais Gif-Like -->
+            <div class="hidden sm:flex justify-between items-center absolute inset-x-4 top-2 pointer-events-none">
+                <span class="text-3xl animate-bounce">🔥</span>
+                <span class="text-3xl animate-bounce">🔥</span>
+            </div>
+
+            <div class="flex justify-center items-center gap-2 mb-2">
+                <span class="text-2xl">⚔️</span>
+                <span class="bg-red-700 text-yellow-300 font-bold px-2 py-1 text-xs border-2 border-yellow-400 rounded uppercase tracking-widest blink">
+                    *** SITE OFICIAL DA WEB 1.0 ***
+                </span>
+                <span class="text-2xl">⚔️</span>
+            </div>
+
+            <!-- BANNER PIXEL ART DO CASTELO -->
+            <div class="bg-gradient-to-b from-amber-700 via-amber-600 to-yellow-500 border-4 border-yellow-800 p-4 rounded-lg shadow-inner text-yellow-100 mb-2">
+                <h1 class="text-3xl sm:text-5xl font-extrabold gold-glow font-serif tracking-wide my-1 text-amber-100">
+                    🏰 CASTELO ROCHA CHUEIRI 🏰
+                </h1>
+                <p class="text-xs sm:text-sm font-mono text-yellow-200 tracking-wider uppercase">
+                    ~ Academia Alquímica & Cidadela do Conhecimento Medieval ~
+                </p>
+            </div>
+
+            <!-- MARQUEE RETRÔ COM FRASE EM MOVIMENTO -->
+            <div class="bg-black text-yellow-400 font-mono text-sm py-1 border-2 border-amber-600 overflow-hidden">
+                <marquee behavior="scroll" direction="left" scrollamount="5">
+                    🧙‍♂️ BEM-VINDO AO BLOG DA ESCOLA ROCHA CHUEIRI! ★ AVISO: AULA DE DEFESA CONTRA DRAGÕES NA SEGUNDA-FEIRA! ★ INSCRIÇÕES PARA O TORNEIO DE JUSTA ABERTAS! ★ NÃO ESQUEÇA DE ASSINAR O NOSSO GUESTBOOK! 🐉
+                </marquee>
+            </div>
+        </header>
+
+        <!-- BARRA DE CONTROLES RETRÔ & MÚSICA MIDI -->
+        <div class="retro-box p-3 mb-4 flex flex-wrap justify-between items-center gap-2 bg-amber-200">
+            <!-- Tocador de Música Medieval Tone.js -->
+            <div class="flex items-center gap-2 bg-amber-100 p-2 border-2 border-amber-600 rounded">
+                <span class="text-xl">🎵</span>
+                <span class="text-xs font-bold text-amber-900">Música Chiptune Medieval:</span>
+                <button id="bgm-btn" onclick="toggleAudio()" class="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs border-2 border-amber-900 shadow active:translate-y-0.5">
+                    ▶️ Tocar BGM 8-bit
+                </button>
+            </div>
+
+            <!-- Contador de Visitas Retrô -->
+            <div class="flex items-center gap-1 bg-black text-green-400 font-mono px-3 py-1 border-2 border-gray-600 rounded text-sm">
+                <span class="text-yellow-400 text-xs">VISITANTES:</span>
+                <span class="bg-green-950 px-1 border border-green-700 text-green-400 font-bold tracking-widest text-base" id="visit-counter">
+                    004829
+                </span>
+            </div>
+
+            <!-- Badges estilo Anos 2000 -->
+            <div class="hidden md:flex gap-2">
+                <span class="bg-blue-900 text-white text-xs px-2 py-0.5 border border-white font-mono">IE 6.0 READY</span>
+                <span class="bg-orange-600 text-white text-xs px-2 py-0.5 border border-white font-mono">800x600 BEST</span>
+                <span class="bg-purple-800 text-white text-xs px-2 py-0.5 border border-white font-mono">GIF ANIMATED</span>
+            </div>
+        </div>
+
+        <!-- LAYOUT PRINCIPAL EM TABELA / GRIDS ESTILO ANOS 2000 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            
+            <!-- MENU LATERAL DA ESQUERDA (NAVEGAÇÃO) -->
+            <aside class="md:col-span-1 flex flex-col gap-4">
+                
+                <div class="retro-box p-3">
+                    <h2 class="bg-amber-700 text-yellow-200 font-bold px-2 py-1 text-center border border-amber-900 mb-2 uppercase text-xs tracking-wider">
+                        📜 Portal de Navegação
+                    </h2>
+                    <ul class="flex flex-col gap-1 text-sm font-bold">
+                        <li>
+                            <button onclick="switchTab('home')" class="w-full text-left px-2 py-1 bg-amber-100 hover:bg-amber-300 border border-amber-500 rounded text-amber-950 flex items-center gap-1">
+                                🏰 Inicio & Avisos
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('magics')" class="w-full text-left px-2 py-1 bg-amber-100 hover:bg-amber-300 border border-amber-500 rounded text-amber-950 flex items-center gap-1">
+                                🔮 Feitiços & Aulas
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('houses')" class="w-full text-left px-2 py-1 bg-amber-100 hover:bg-amber-300 border border-amber-500 rounded text-amber-950 flex items-center gap-1">
+                                🛡️ As 4 Casas
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('guestbook')" class="w-full text-left px-2 py-1 bg-amber-100 hover:bg-amber-300 border border-amber-500 rounded text-amber-950 flex items-center gap-1">
+                                ✍️ Livro de Visitas
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- WIDGET DE STATUS DO CASTELO -->
+                <div class="retro-box p-3">
+                    <h2 class="bg-amber-700 text-yellow-200 font-bold px-2 py-1 text-center border border-amber-900 mb-2 uppercase text-xs tracking-wider">
+                        🌡️ Clima no Castelo
+                    </h2>
+                    <div class="retro-box-inner p-2 text-xs font-mono text-amber-950 flex flex-col gap-1">
+                        <p><strong>Estação:</strong> Outono Místico</p>
+                        <p><strong>Fase da Lua:</strong> 🌕 Cheia</p>
+                        <p><strong>Ameaça de Dragão:</strong> <span class="text-green-700 font-bold">BAIXA</span></p>
+                        <div class="w-full bg-amber-300 h-3 border border-amber-700 mt-1">
+                            <div class="bg-amber-600 h-full w-3/4"></div>
+                        </div>
+                        <span class="text-[10px] text-right">Mana do Castelo: 75%</span>
+                    </div>
+                </div>
+
+                <!-- GIF ANIMADO RETRÔ E VOTAÇÃO -->
+                <div class="retro-box p-3 text-center">
+                    <h2 class="bg-amber-700 text-yellow-200 font-bold px-2 py-1 text-center border border-amber-900 mb-2 uppercase text-xs tracking-wider">
+                        🗳️ Enquete Semanal
+                    </h2>
+                    <p class="text-xs font-bold mb-2">Qual a sua Poção Favorita?</p>
+                    <form id="poll-form" onsubmit="votePoll(event)" class="text-left text-xs flex flex-col gap-1">
+                        <label class="cursor-pointer flex items-center gap-1">
+                            <input type="radio" name="potion" value="Cura" checked> Elixir de Vida
+                        </label>
+                        <label class="cursor-pointer flex items-center gap-1">
+                            <input type="radio" name="potion" value="Invisibilidade"> Névoa de Invisibilidade
+                        </label>
+                        <label class="cursor-pointer flex items-center gap-1">
+                            <input type="radio" name="potion" value="Fogo"> Essência do Dragão
+                        </label>
+                        <button type="submit" class="mt-2 bg-amber-600 text-white font-bold py-1 border border-amber-800 text-xs hover:bg-amber-700">
+                            VOTAR!
+                        </button>
+                    </form>
+                    <div id="poll-result" class="text-[11px] text-green-800 font-bold mt-2 hidden">
+                        Voto registrado com sucesso! ✨
+                    </div>
+                </div>
+
+                <!-- Banners Anos 2000 -->
+                <div class="flex flex-col items-center gap-2">
+                    <div class="border-2 border-yellow-600 bg-amber-900 text-yellow-300 p-2 text-center text-xs font-bold w-full">
+                        ⚡ PARCEIRO OFICIAL:<br>
+                        <span class="underline text-yellow-100">Guilda dos Alquimistas.com</span>
+                    </div>
+                    <img src="https://placehold.co/120x60/854d0e/fef08a?text=GIF+DRAGON+ANIMATED" alt="Dragão Gif" class="border-2 border-amber-700">
+                </div>
+
+            </aside>
+
+            <!-- CONTEÚDO PRINCIPAL (MUDANÇA DE ABAS) -->
+            <main class="md:col-span-3 flex flex-col gap-4">
+                
+                <!-- ABA 1: NOTÍCIAS DA ESCOLA (HOME) -->
+                <section id="tab-home" class="retro-box p-4">
+                    <div class="border-b-2 border-amber-600 pb-2 mb-4 flex justify-between items-center">
+                        <h2 class="text-xl sm:text-2xl font-bold text-amber-900 font-serif flex items-center gap-2">
+                            <span>📜</span> Mural de Notícias & Pergaminhos
+                        </h2>
+                        <span class="text-xs font-mono bg-amber-200 px-2 py-1 border border-amber-500">
+                            Atualizado em: Oct 2000
+                        </span>
+                    </div>
+
+                    <!-- POST DE NOTÍCIA 1 -->
+                    <article class="retro-box-inner p-3 mb-4">
+                        <div class="flex justify-between items-center border-b border-amber-400 pb-1 mb-2">
+                            <h3 class="font-bold text-amber-900 text-base flex items-center gap-1">
+                                ⚔️ Grande Torneio de Magia e Justa de Rocha Chueiri!
+                            </h3>
+                            <span class="text-[11px] font-mono text-amber-800">Postado por: Mestre Chueiri</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed mb-2">
+                            Saudações a todos os aprendizes e cavaleiros! Na próxima lua cheia realizaremos o torneio anual na arena principal do castelo. Lembrem-se que o uso de poções de voo é estritamente proibido durante as corridas de cavalo.
+                        </p>
+                        <div class="flex justify-between items-center text-[11px] text-amber-700 font-mono">
+                            <span>💬 14 Comentários no Livro</span>
+                            <span class="bg-amber-300 px-1 border border-amber-500">Categoria: Eventos</span>
+                        </div>
+                    </article>
+
+                    <!-- POST DE NOTÍCIA 2 -->
+                    <article class="retro-box-inner p-3 mb-4">
+                        <div class="flex justify-between items-center border-b border-amber-400 pb-1 mb-2">
+                            <h3 class="font-bold text-amber-900 text-base flex items-center gap-1">
+                                🧪 Novas Ervas na Estufa de Botânica Arcana
+                            </h3>
+                            <span class="text-[11px] font-mono text-amber-800">Postado por: Profe. Morgana</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-amber-950 leading-relaxed mb-2">
+                            Chegaram novas mudas de Raiz de Mandrágora e Flores de Dragão Dourado. Os alunos do segundo ano de feitiçaria devem trazer seus protetores auriculares para as aulas teóricas na terça-feira!
+                        </p>
+                        <div class="flex justify-between items-center text-[11px] text-amber-700 font-mono">
+                            <span>💬 8 Comentários</span>
+                            <span class="bg-amber-300 px-1 border border-amber-500">Categoria: Aulas</span>
+                        </div>
+                    </article>
+
+                    <!-- REGULAMENTO DO CASTELO -->
+                    <div class="bg-amber-100 p-3 border-2 border-dashed border-amber-600 rounded text-xs">
+                        <h4 class="font-bold text-amber-900 mb-1 flex items-center gap-1">
+                            ⚠️️ Regras Sagradas de Rocha Chueiri:
+                        </h4>
+                        <ol class="list-decimal list-inside space-y-1 text-amber-950">
+                            <li>Proibido transformar colegas de classe em sapos nos corredores.</li>
+                            <li>A biblioteca abre ao amanhecer e fecha ao bater do terceiro sino.</li>
+                            <li>Pedras de fogo devem ser armazenadas em baús de ferro temperado.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- ABA 2: AULAS E FEITIÇOS -->
+                <section id="tab-magics" class="retro-box p-4 hidden">
+                    <div class="border-b-2 border-amber-600 pb-2 mb-4">
+                        <h2 class="text-xl sm:text-2xl font-bold text-amber-900 font-serif flex items-center gap-2">
+                            🔮 Compêndio de Feitiços & Disciplinas
+                        </h2>
+                        <p class="text-xs text-amber-800">Grade curricular ministrada nas torres do castelo.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="retro-box-inner p-3 border-l-4 border-l-amber-700">
+                            <h3 class="font-bold text-amber-950 text-sm">✨ Lux Aurum (Luz Dourada)</h3>
+                            <p class="text-xs text-amber-800 mt-1">Ilumina as catacumbas de pedra cinzenta do castelo com um brilho amarelo intenso.</p>
+                            <span class="inline-block mt-2 text-[10px] font-mono bg-yellow-300 px-1 border border-yellow-600">Nível: Aprendiz</span>
+                        </div>
+
+                        <div class="retro-box-inner p-3 border-l-4 border-l-red-700">
+                            <h3 class="font-bold text-amber-950 text-sm">🔥 Ignis Rocha</h3>
+                            <p class="text-xs text-amber-800 mt-1">Lança pequenas labaredas capazes de acender tochas e afastar gárgulas.</p>
+                            <span class="inline-block mt-2 text-[10px] font-mono bg-red-200 px-1 border border-red-500">Nível: Intermediário</span>
+                        </div>
+
+                        <div class="retro-box-inner p-3 border-l-4 border-l-blue-700">
+                            <h3 class="font-bold text-amber-950 text-sm">🛡️ Escudo de Tijolo Arcano</h3>
+                            <p class="text-xs text-amber-800 mt-1">Ergue uma barreira espiritual temporária com a rigidez dos muros de Rocha Chueiri.</p>
+                            <span class="inline-block mt-2 text-[10px] font-mono bg-blue-200 px-1 border border-blue-500">Nível: Avançado</span>
+                        </div>
+
+                        <div class="retro-box-inner p-3 border-l-4 border-l-green-700">
+                            <h3 class="font-bold text-amber-950 text-sm">🌿 Alquimia dos Elementos</h3>
+                            <p class="text-xs text-amber-800 mt-1">Transmuta metais comuns em elixires de regeneração e cura rápida.</p>
+                            <span class="inline-block mt-2 text-[10px] font-mono bg-green-200 px-1 border border-green-500">Nível: Aprendiz</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ABA 3: AS 4 CASAS DO CASTELO -->
+                <section id="tab-houses" class="retro-box p-4 hidden">
+                    <div class="border-b-2 border-amber-600 pb-2 mb-4">
+                        <h2 class="text-xl sm:text-2xl font-bold text-amber-900 font-serif flex items-center gap-2">
+                            🛡️ Casarões de Rocha Chueiri
+                        </h2>
+                        <p class="text-xs text-amber-800">Conheça as divensas ordens de alunos do castelo.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                        <!-- Casa 1 -->
+                        <div class="bg-amber-100 p-3 border-2 border-yellow-600 rounded">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-2xl">🦁</span>
+                                <h3 class="font-bold text-amber-900">Ordem do Leão Dourado</h3>
+                            </div>
+                            <p class="text-xs text-amber-950">Focados em coragem, feitiços de combate e cavalgada.</p>
+                            <p class="text-[11px] font-bold text-amber-700 mt-2">Pontos: 340 pts</p>
+                        </div>
+
+                        <!-- Casa 2 -->
+                        <div class="bg-stone-200 p-3 border-2 border-stone-600 rounded">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-2xl">🦅</span>
+                                <h3 class="font-bold text-stone-900">Guardiões da Torre Cinzenta</h3>
+                            </div>
+                            <p class="text-xs text-stone-950">Especialistas em arquitetura, história e astronomia arcana.</p>
+                            <p class="text-[11px] font-bold text-stone-700 mt-2">Pontos: 310 pts</p>
+                        </div>
+
+                        <!-- Casa 3 -->
+                        <div class="bg-emerald-100 p-3 border-2 border-emerald-600 rounded">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-2xl">🐍</span>
+                                <h3 class="font-bold text-emerald-900">Sábios da Serpente de Pedra</h3>
+                            </div>
+                            <p class="text-xs text-emerald-950">Mestres das poções secretas e artes misteriosas.</p>
+                            <p class="text-[11px] font-bold text-emerald-700 mt-2">Pontos: 295 pts</p>
+                        </div>
+
+                        <!-- Casa 4 -->
+                        <div class="bg-orange-100 p-3 border-2 border-orange-600 rounded">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-2xl">🦡</span>
+                                <h3 class="font-bold text-orange-900">Alquimistas do Sol</h3>
+                            </div>
+                            <p class="text-xs text-orange-950">Dedicação, herbologia e lealdade ao Reino Chueiri.</p>
+                            <p class="text-[11px] font-bold text-orange-700 mt-2">Pontos: 365 pts (Líder! 🏆)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ABA 4: LIVRO DE VISITITAS (GUESTBOOK) -->
+                <section id="tab-guestbook" class="retro-box p-4 hidden">
+                    <div class="border-b-2 border-amber-600 pb-2 mb-4">
+                        <h2 class="text-xl sm:text-2xl font-bold text-amber-900 font-serif flex items-center gap-2">
+                            ✍️ Livro de Visitas (Guestbook)
+                        </h2>
+                        <p class="text-xs text-amber-800">Deixe sua mensagem gravada nas paredes de pedra do castelo!</p>
+                    </div>
+
+                    <!-- FORMULÁRIO -->
+                    <form onsubmit="addGuestbookMessage(event)" class="retro-box-inner p-3 mb-4 flex flex-col gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-xs font-bold text-amber-900">Seu Nome / NICKNAME:</label>
+                                <input type="text" id="gb-name" required placeholder="Ex: Mago Merlin_2000" class="w-full text-xs p-1 border border-amber-600 bg-yellow-50 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-amber-900">Sua Casa / Reinos:</label>
+                                <input type="text" id="gb-house" placeholder="Ex: Leão Dourado" class="w-full text-xs p-1 border border-amber-600 bg-yellow-50 focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amber-900">Mensagem / Pergaminho:</label>
+                            <textarea id="gb-msg" required rows="2" placeholder="Escreva algo épico..." class="w-full text-xs p-1 border border-amber-600 bg-yellow-50 focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1 px-3 border-2 border-amber-900 text-xs shadow">
+                            ✍️ ASSINAR PERGAMINHO!
+                        </button>
+                    </form>
+
+                    <!-- MENSAGENS DO GUESTBOOK -->
+                    <div id="guestbook-list" class="flex flex-col gap-2">
+                        <div class="bg-amber-100 p-2 border border-amber-400 text-xs">
+                            <div class="flex justify-between font-bold text-amber-900 border-b border-amber-300 pb-0.5">
+                                <span>Lord_Arthur_99 (Valfenda)</span>
+                                <span class="text-[10px] font-normal text-amber-700">12/10/2000</span>
+                            </div>
+                            <p class="mt-1 text-amber-950">Saudações! Belo blog! O visual de pedra e dourado ficou espetacular. Vida longa ao Mestre Rocha Chueiri!</p>
+                        </div>
+
+                        <div class="bg-amber-100 p-2 border border-amber-400 text-xs">
+                            <div class="flex justify-between font-bold text-amber-900 border-b border-amber-300 pb-0.5">
+                                <span>Bruxinha_Star (Torre Cinzenta)</span>
+                                <span class="text-[10px] font-normal text-amber-700">08/10/2000</span>
+                            </div>
+                            <p class="mt-1 text-amber-950">Alguém tem as anotações da aula de alquimia de ontem? Perdi a parte dos ingredientes do elixir! Me mandem uma coruja!</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- RODAPÉ RETRÔ ANOS 2000 -->
+        <footer class="retro-box p-4 mt-4 text-center text-xs font-mono">
+            <div class="flex justify-center items-center gap-3 flex-wrap mb-2">
+                <span class="bg-yellow-200 border border-amber-700 px-2 py-0.5 text-amber-900">HTML 4.01 STRICT</span>
+                <span class="bg-yellow-200 border border-amber-700 px-2 py-0.5 text-amber-900">MADE WITH PASSION</span>
+                <span class="bg-yellow-200 border border-amber-700 px-2 py-0.5 text-amber-900">BEST VIEWED IN 800x600</span>
+            </div>
+            <p class="text-amber-950 font-bold mb-1">
+                © 2000 Castelo & Academia Rocha Chueiri - Todos os direitos reservados no Reino.
+            </p>
+            <p class="text-[10px] text-amber-800">
+                Desenvolvido com pedras cinzentas e poções amarelas arcanas. 🏰✨
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Lógica de Troca de Abas
+        function switchTab(tabId) {
+            const tabs = ['home', 'magics', 'houses', 'guestbook'];
+            tabs.forEach(id => {
+                const element = document.getElementById('tab-' + id);
+                if (element) {
+                    if (id === tabId) {
+                        element.classList.remove('hidden');
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // Adicionar Mensagem ao Guestbook
+        function addGuestbookMessage(e) {
+            e.preventDefault();
+            const name = document.getElementById('gb-name').value;
+            const house = document.getElementById('gb-house').value || 'Viajante';
+            const msg = document.getElementById('gb-msg').value;
+
+            const list = document.getElementById('guestbook-list');
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('pt-BR');
+
+            const item = document.createElement('div');
+            item.className = 'bg-amber-100 p-2 border border-amber-400 text-xs animate-pulse';
+            item.innerHTML = `
+                <div class="flex justify-between font-bold text-amber-900 border-b border-amber-300 pb-0.5">
+                    <span>${escapeHtml(name)} (${escapeHtml(house)})</span>
+                    <span class="text-[10px] font-normal text-amber-700">${dateStr}</span>
+                </div>
+                <p class="mt-1 text-amber-950">${escapeHtml(msg)}</p>
+            `;
+
+            list.insertBefore(item, list.firstChild);
+
+            // Limpa formulário
+            document.getElementById('gb-name').value = '';
+            document.getElementById('gb-house').value = '';
+            document.getElementById('gb-msg').value = '';
+
+            setTimeout(() => {
+                item.classList.remove('animate-pulse');
+            }, 1000);
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // Lógica da Enquete
+        function votePoll(e) {
+            e.preventDefault();
+            const result = document.getElementById('poll-result');
+            result.classList.remove('hidden');
+            setTimeout(() => {
+                result.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Efeito de Brilho Sparkle no Cursor do Rato
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.1) { // Frequência de faíscas
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 600);
+            }
+        });
+
+        // MUSICA MIDI / CHIPTUNE 8-BIT MEDIEVAL COM TONE.JS
+        let isPlaying = false;
+        let synth, loop;
+
+        async function toggleAudio() {
+            const btn = document.getElementById('bgm-btn');
+            
+            if (!isPlaying) {
+                await Tone.start();
+                
+                // Sintetizador estilo 8-bit / Chiptune
+                synth = new Tone.Synth({
+                    oscillator: { type: "square" },
+                    envelope: { attack: 0.02, decay: 0.1, sustain: 0.3, release: 0.4 }
+                }).toDestination();
+                synth.volume.value = -12;
+
+                // Melodia medieval clássica 8-bit
+                const notes = [
+                    { time: "0:0", note: "A4", duration: "8n" },
+                    { time: "0:1", note: "C5", duration: "8n" },
+                    { time: "0:2", note: "B4", duration: "8n" },
+                    { time: "0:3", note: "A4", duration: "8n" },
+                    { time: "1:0", note: "E4", duration: "4n" },
+                    { time: "1:2", note: "G4", duration: "4n" },
+                    { time: "2:0", note: "A4", duration: "8n" },
+                    { time: "2:1", note: "B4", duration: "8n" },
+                    { time: "2:2", note: "C5", duration: "4n" },
+                    { time: "3:0", note: "E5", duration: "2n" },
+                ];
+
+                const part = new Tone.Part((time, note) => {
+                    synth.triggerAttackRelease(note.note, note.duration, time);
+                }, notes).start(0);
+
+                part.loop = true;
+                part.loopEnd = "4m";
+
+                Tone.Transport.bpm.value = 110;
+                Tone.Transport.start();
+
+                isPlaying = true;
+                btn.innerHTML = "⏸️ Pausar BGM";
+                btn.classList.replace('bg-amber-600', 'bg-red-600');
+            } else {
+                Tone.Transport.stop();
+                isPlaying = false;
+                btn.innerHTML = "▶️ Tocar BGM 8-bit";
+                btn.classList.replace('bg-red-600', 'bg-amber-600');
+            }
+        }
+    </script>
+</body>
+</html>
